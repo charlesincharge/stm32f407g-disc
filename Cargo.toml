@@ -27,6 +27,7 @@ accelerometer = "0.11.0"
 cortex-m = "0.7.2"
 cortex-m-rt = "0.6.13"
 lis302dl = "0.1.0"
+panic-itm = "0.4.2"
 
 [dependencies.embedded-hal]
 features = ["unproven"]
@@ -41,7 +42,6 @@ version = "0.10.0"
 ssd1306 = "0.5.2"
 nb = "1.0"
 panic-halt = "0.2"
-panic-itm = "0.4"
 
 [profile.dev]
 debug = true
@@ -50,6 +50,3 @@ debug = true
 debug = true
 lto = true
 opt-level = "s"
-
-[dependencies.panic-itm]
-version = "0.4.2"
