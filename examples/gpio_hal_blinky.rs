@@ -7,7 +7,7 @@ use panic_halt as _;
 use stm32f407g_disc as board;
 
 use crate::board::{
-    hal::stm32,
+    hal::pac,
     hal::{delay::Delay, prelude::*},
     led::{LedColor, Leds},
 };
@@ -18,7 +18,7 @@ use cortex_m_rt::entry;
 
 #[entry]
 fn main() -> ! {
-    if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
+    if let (Some(p), Some(cp)) = (pac::Peripherals::take(), Peripherals::take()) {
         let gpiod = p.GPIOD.split();
 
         // Initialize on-board LEDs

@@ -4,13 +4,13 @@ use lis302dl;
 use crate::hal::gpio;
 use crate::hal::gpio::gpioa;
 use crate::hal::gpio::gpioe;
+use crate::hal::pac;
 use crate::hal::prelude::*;
 use crate::hal::rcc;
 use crate::hal::spi;
-use crate::hal::stm32;
 
 type Spi1 = spi::Spi<
-    stm32::SPI1,
+    pac::SPI1,
     (
         gpioa::PA5<gpio::Alternate<{ gpio::AF5 }>>,
         gpioa::PA6<gpio::Alternate<{ gpio::AF5 }>>,
@@ -29,7 +29,7 @@ impl Accelerometer {
     pub fn new(
         gpioa: gpioa::Parts,
         gpioe: gpioe::Parts,
-        spi1: stm32::SPI1,
+        spi1: pac::SPI1,
         clocks: rcc::Clocks,
     ) -> Self {
         let sck = gpioa.pa5.into_alternate().internal_pull_up(false);

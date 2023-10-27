@@ -13,14 +13,14 @@ use stm32f407g_disc as board;
 use nb::block;
 
 use crate::board::{
+    hal::pac,
     hal::prelude::*,
-    hal::stm32,
     serial::{config::Config, Serial},
 };
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    if let Some(p) = stm32::Peripherals::take() {
+    if let Some(p) = pac::Peripherals::take() {
         let gpioa = p.GPIOA.split();
         let rcc = p.RCC.constrain();
         let clocks = rcc.cfgr.sysclk(48.mhz()).freeze();

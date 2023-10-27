@@ -13,7 +13,7 @@ use nb::block;
 
 use crate::board::{
     hal::prelude::*,
-    hal::stm32,
+    hal::pac,
     serial::{config::Config, Serial},
 };
 
@@ -22,7 +22,7 @@ use cortex_m::interrupt::Mutex;
 use core::{cell::RefCell, fmt::Write, ops::DerefMut};
 
 // Make the write part of our serial port globally available
-static PANIC_SERIAL: Mutex<RefCell<Option<board::serial::Tx<board::stm32::USART2>>>> =
+static PANIC_SERIAL: Mutex<RefCell<Option<board::serial::Tx<board::pac::USART2>>>> =
     Mutex::new(RefCell::new(None));
 
 use core::panic::PanicInfo;
@@ -43,7 +43,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    if let Some(p) = stm32::Peripherals::take() {
+    if let Some(p) = pac::Peripherals::take() {
         let gpioa = p.GPIOA.split();
         let rcc = p.RCC.constrain();
         let clocks = rcc.cfgr.sysclk(48.mhz()).freeze();

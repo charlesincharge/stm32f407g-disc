@@ -11,13 +11,13 @@ use stm32f407g_disc as board;
 
 use ssd1306::{displayrotation::DisplayRotation, mode::TerminalMode, Builder, I2CDIBuilder};
 
-use crate::board::{hal::i2c::*, hal::prelude::*, hal::stm32};
+use crate::board::{hal::i2c::*, hal::prelude::*, hal::pac};
 
 use core::fmt::Write;
 
 #[cortex_m_rt::entry]
 fn main() -> ! {
-    if let Some(p) = stm32::Peripherals::take() {
+    if let Some(p) = pac::Peripherals::take() {
         let gpiob = p.GPIOB.split();
         let rcc = p.RCC.constrain();
 
