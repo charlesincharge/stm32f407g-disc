@@ -12,9 +12,9 @@ use crate::hal::spi;
 type Spi1 = spi::Spi<
     pac::SPI1,
     (
-        gpioa::PA5<gpio::Alternate<{ gpio::AF5 }>>,
-        gpioa::PA6<gpio::Alternate<{ gpio::AF5 }>>,
-        gpioa::PA7<gpio::Alternate<{ gpio::AF5 }>>,
+        gpioa::PA5<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
+        gpioa::PA6<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
+        gpioa::PA7<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
     ),
     spi::TransferModeNormal,
 >;
