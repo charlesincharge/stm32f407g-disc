@@ -12,9 +12,9 @@ use crate::hal::spi;
 type Spi1 = spi::Spi<
     pac::SPI1,
     (
-        gpioa::PA5<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
-        gpioa::PA6<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
-        gpioa::PA7<gpio::Alternate<gpio::PushPull, { gpio::AF5 }>>,
+        gpioa::PA5<gpio::Alternate<gpio::PushPull, 5>>,
+        gpioa::PA6<gpio::Alternate<gpio::PushPull, 5>>,
+        gpioa::PA7<gpio::Alternate<gpio::PushPull, 5>>,
     ),
     spi::TransferModeNormal,
 >;
@@ -41,7 +41,7 @@ impl Accelerometer {
             phase: spi::Phase::CaptureOnFirstTransition,
         };
 
-        let spi = spi::Spi::new(spi1, (sck, miso, mosi), spi_mode, 10.mhz(), clocks);
+        let spi = spi::Spi::new(spi1, (sck, miso, mosi), spi_mode, 10.mhz(), &clocks);
 
         let mut chip_select = gpioe.pe3.into_push_pull_output();
         chip_select.set_high();
